@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-t_!n%3ph(-bpkd2+z2!zujx+6r_x%&3%allmra#8#x0v*iogzf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['resturant-project.vercel.app']
 
 
 # Application definition
