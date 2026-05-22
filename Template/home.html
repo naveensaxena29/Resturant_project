@@ -404,10 +404,32 @@
 
   <!-- end client section -->
 
-
-
+  <script>
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', function() {
+        const itemId = this.getAttribute('data-item-id');
+        const itemName = this.getAttribute('data-item-name');
+        const itemPrice = this.getAttribute('data-item-price');
+  
+        fetch('/add-to-cart/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFTOKEN': '{{ csrf_token }}'
+          },
+          body: `item_id=${itemId}`
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.message) {
+            alert(data.message);
+          } else {
+            alert('Failed to add item to cart.');
+          }
+        })
+        .catch(error => console.error('Error:', error));
+      });
+    });
+  </script>
+  
 {% endblock main %}
-
-
-
-

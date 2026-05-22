@@ -7,40 +7,43 @@
 {% block main %}
 
   <!-- food section -->
+
   <section class="food_section layout_padding-bottom">
     <div class="container">
       <div class="heading_container heading_center">
-        <h2>Our Menu</h2>
+        <h2>
+          Our Menu
+        </h2>
       </div>
 
-      <!-- ✅ Category filter buttons -->
       <ul class="filters_menu">
         <li class="active" data-filter="*">All</li>
         {% for i in list %}
-        <li data-filter=".{{ i.Category_name }}">{{ i.Category_name }}</li>
+        <li data-filter=".{{i.Category_name}}">{{i.Category_name}}</li>
         {% endfor %}
       </ul>
 
       <div class="filters-content">
         <div class="row grid">
           {% for j in items %}
-          <!-- ✅ FIXED: was {{j.Category}} (gives ID), now {{j.Category.Category_name}} (gives name) -->
-          <div class="col-sm-6 col-lg-4 all {{ j.Category.Category_name }}">
+          <div class="col-sm-6 col-lg-4 all {{j.Category}}">
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="{{ j.Image.url }}" alt="{{ j.Item_name }}">
+                  <img src="/media/{{j.Image}} " alt="{{j.Image}}">
                 </div>
                 <div class="detail-box">
-                  <h5>{{ j.Item_name }}</h5>
-                  <p>{{ j.description }}</p>
+                  <h5>
+                    {{j.Item_name}}
+                  </h5>
+                  <p>
+                    {{j.description}}
+                  </p>
                   <div class="options">
-                    <h6>₹{{ j.Price }}</h6>
-                    <button 
-                      class="btn btn-success add-to-cart" 
-                      data-item-id="{{ j.id }}" 
-                      data-item-name="{{ j.Item_name }}" 
-                      data-item-price="{{ j.Price }}">
+                    <h6>
+                      ${{j.Price}}
+                    </h6>
+                    <button class="btn btn-success add-to-cart" data-item-id="{{j.id}}" data-item-name="{{j.Item_name}}" data-item-price="{{j.Price}}">
                       Add to Cart
                     </button>
                   </div>
@@ -48,32 +51,31 @@
               </div>
             </div>
           </div>
-          {% empty %}
-          <!-- ✅ Shows message if no items exist in database -->
-          <div class="col-12 text-center">
-            <p>No menu items found. Please add items from the admin panel.</p>
-          </div>
           {% endfor %}
         </div>
       </div>
-
       <div class="btn-box">
-        <a href="">View More</a>
+        <a href="">
+          View More
+        </a>
       </div>
     </div>
   </section>
+
   <!-- end food section -->
 
   <script>
     document.querySelectorAll('.add-to-cart').forEach(button => {
-      button.addEventListener('click', function () {
+      button.addEventListener('click', function() {
         const itemId = this.getAttribute('data-item-id');
-
+        const itemName = this.getAttribute('data-item-name');
+        const itemPrice = this.getAttribute('data-item-price');
+  
         fetch('/add-to-cart/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': '{{ csrf_token }}'
+            'X-CSRFTOKEN': '{{ csrf_token }}'
           },
           body: `item_id=${itemId}`
         })
@@ -89,5 +91,6 @@
       });
     });
   </script>
+  
 
 {% endblock main %}

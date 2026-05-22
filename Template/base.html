@@ -30,7 +30,6 @@
   <link href="{% static 'css/style.css' %}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
-  <!-- <script src="{% static 'js/chat.js' %}"></script> -->
 
 </head>
 
@@ -63,10 +62,8 @@
               <li class="nav-item {% block menu_status %}{% endblock menu_status %}">
                 <a class="nav-link " href="{% url "Menu" %}">Menu</a>
               </li>
-
               <li class="nav-item {% block about_status %}{% endblock about_status %}">
                 <a class="nav-link" href="{% url "About" %}">About</a>
-                
               </li>
               <li class="nav-item {% block table_status %}{% endblock table_status %}">
                 <a class="nav-link" href="{% url "Book_Table" %}">Book Table</a>
@@ -224,8 +221,6 @@
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
-  <!-- Chatboard js -->
-  <script src="{% static 'js/chat.js' %}"></script>
   <!-- End Google Map -->
     <!-- JavaScript for Cart Button -->
     <script>
